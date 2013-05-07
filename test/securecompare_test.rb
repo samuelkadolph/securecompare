@@ -24,20 +24,4 @@ describe SecureCompare do
     klass.send(:extend, SecureCompare)
     klass.private_methods.include?(:secure_compare).must_equal(true)
   end
-
-  describe "Performance" do
-    bench_range do
-      bench_exp(1, 1_000_000)
-    end
-
-    bench_performance_constant "strings of non equal size" do |n|
-      base = "a" * n
-      SecureCompare.secure_compare(base + "a", base)
-    end
-
-    bench_performance_linear "strings of equal size", 0.99999 do |n|
-      base = "a" * n
-      SecureCompare.secure_compare(base + "a", base + "b")
-    end
-  end
 end
