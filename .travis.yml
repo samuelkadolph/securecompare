@@ -1,5 +1,9 @@
 language: ruby
 rvm:
+  - 2.6.0
+  - 2.5.3
+  - 2.4.5
+  - 2.3.8
   - 1.9.3
-  - jruby-19mode
+  - jruby-9.2.5.0
 script: bundle exec rake test
