@@ -24,4 +24,24 @@ describe SecureCompare do
     klass.send(:extend, SecureCompare)
     klass.private_methods.include?(:secure_compare).must_equal(true)
   end
+
+  it "takes nearly the same time to compare different strings" do
+    max_length = 100_000
+
+    aaaa = "a" * max_length
+    abbb = "a" + "b" * (max_length - 1)
+    aaab = "a" * (max_length - 1) + "b"
+
+    timings = [abbb, aaab].map do |string|
+      start_time = Time.now
+
+      100.times do
+        SecureCompare.secure_compare(string, aaaa)
+      end
+
+      Time.now - start_time
+    end
+
+    assert_in_epsilon 1, timings.max/timings.min, 0.1
+  end
 end
