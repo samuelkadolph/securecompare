@@ -6,6 +6,7 @@ rvm:
   - 2.3.8
   - 1.9.3
   - jruby-9.2.5.0
+  - truffleruby-head
 
 matrix:
   fast_finish: true
